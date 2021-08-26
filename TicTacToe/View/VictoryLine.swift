@@ -12,7 +12,7 @@ struct VictoryLine: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        Rectangle().frame(width: 5, height: UIScreen.main.bounds.width - 50, alignment: .center)
+        Rectangle().frame(width: 5, height: lineWidth, alignment: .center)
             .rotationEffect(.degrees(victoryLineAngle))
             .offset(x: Xoffset, y: Yoffset)
             .opacity(viewModel.endGame ? 1 : 0)
@@ -72,7 +72,7 @@ struct VictoryLine: View {
             ||  checkForWinPossition(for: viewModel.oLine, in: [1, 2, 3])
             ||  checkForWinPossition(for: viewModel.oLine, in: [4, 5, 6])
             ||  checkForWinPossition(for: viewModel.oLine, in: [7, 8, 9])
-        { degree = 90; viewModel.endGame = true}
+        { degree = 90; viewModel.endGame = true }
         else  if checkForWinPossition(for: viewModel.xLine, in: [1, 4, 7])
             ||  checkForWinPossition(for: viewModel.xLine, in:  [2, 5, 8])
             ||  checkForWinPossition(for: viewModel.xLine, in: [3, 6, 9])
@@ -83,10 +83,12 @@ struct VictoryLine: View {
             ||  checkForWinPossition(for: viewModel.oLine, in: [1, 5, 9])
         { degree = 135; viewModel.endGame = true } else if checkForWinPossition(for: viewModel.xLine, in: [3, 5, 7])
             ||  checkForWinPossition(for: viewModel.oLine, in: [3, 5, 7])
-        { degree = 225; viewModel.endGame = true  }
+        { degree = 225; viewModel.endGame = true }
         
         return degree
     }
+    
+    private var lineWidth: CGFloat { victoryLineAngle == 135 || victoryLineAngle == 225 ? 400 : 320 }
     
     private func checkForWinPossition(for side: [Int], in array: [Int]) -> Bool {
         var newArray = [Int]()
