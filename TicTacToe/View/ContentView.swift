@@ -32,7 +32,7 @@ struct ContentView: View {
                 LazyVGrid(columns: Array(repeating: GridItem(.fixed(100), spacing: 0), count: 3), spacing: 0){
                     ForEach(0..<viewModel.figures.count, id: \.self) { index in
                         Rectangle()
-                            .fill(Color.white)
+                            .fill(Color("SquareColor"))
                             .frame(width: 100, height: 100)
                             .overlay(Rectangle()
                                         .stroke(lineWidth: 3)
@@ -46,7 +46,7 @@ struct ContentView: View {
                 .overlay(Rectangle()
                             .stroke(lineWidth: 5)
                             .frame(width: 300, height: 300)
-                            .foregroundColor(.white))
+                            .foregroundColor(Color("SquareColor")))
             
                 
                 VictoryLine()
@@ -64,6 +64,7 @@ struct ContentView: View {
                     viewModel.resetGame(isResetButtonPressed: true)
                 }
                 .onLongPressGesture {
+                    viewModel.resetGame(isResetButtonPressed: true)
                     viewModel.xScore = 0
                     viewModel.oScore = 0
                 }
@@ -74,6 +75,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
+            
     }
 }
 
