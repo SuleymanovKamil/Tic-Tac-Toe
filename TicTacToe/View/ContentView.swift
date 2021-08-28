@@ -59,7 +59,7 @@ struct ContentView: View {
             
             Image(systemName: "arrow.counterclockwise.circle")
                 .font(.largeTitle)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .onTapGesture {
                     viewModel.resetGame(isResetButtonPressed: true)
                 }
