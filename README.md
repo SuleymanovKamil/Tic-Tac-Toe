@@ -1,4 +1,4 @@
 
 Tic Tac Toe game in pure SwiftUI
 
-![TicTacToe](https://user-images.githubusercontent.com/38867359/130755412-a88fc6d3-2317-4313-a904-791b376e4129.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/38867359/131227752-be67f504-bc76-486f-a517-c9971a90bb75.gif)
