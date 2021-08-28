@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State private var resetGame = false
+    @State private var resetRound = false
     @StateObject private var viewModel = ViewModel()
     
     var body: some View {
@@ -52,18 +53,32 @@ struct ContentView: View {
                 VictoryLine()
                     .environmentObject(viewModel)
             }
-            .padding(.bottom, 30)
-            
+            .padding(.bottom, resetGame ? 10 : 30)
             
             Spacer()
             
-            Image(systemName: "arrow.counterclockwise.circle")
-                .font(.largeTitle)
-                .foregroundColor(.primary)
+            Image(systemName: "arrow.counterclockwise.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(height: resetGame ? 70 : 50)
+                .foregroundColor(.red )
+                .rotationEffect(.degrees(resetRound ? 360 : 0))
                 .onTapGesture {
+                    withAnimation{
+                    resetRound.toggle()
+                    }
                     viewModel.resetGame(isResetButtonPressed: true)
                 }
                 .onLongPressGesture {
+                    withAnimation{
+                    resetGame.toggle()
+                       
+                    }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation{
+                            resetGame.toggle()
+                        }
+                    }
                     viewModel.resetGame(isResetButtonPressed: true)
                     viewModel.xScore = 0
                     viewModel.oScore = 0

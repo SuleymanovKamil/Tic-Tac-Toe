@@ -16,7 +16,22 @@ class ViewModel: ObservableObject {
     
     @Published var xScore = 0
     @Published var oScore = 0
-    @Published var bannerText = ""
+    
+    var bannerText: String {
+        let XWin = endGame && currentStep <= 9 && xLine.count > oLine.count
+        let OWin = endGame && currentStep <= 9 && xLine.count == oLine.count
+       
+        if XWin {
+            return "X WIN!"
+        } else if OWin {
+            return "O WIN!"
+        } else if currentStep == 9 {
+            return "Draw!"
+        } else {
+            return ""
+        }
+        
+    }
     @Published var figures = [
         Figure(id: 1, figure: "xmark"),
         Figure(id: 2, figure: "circle"),
@@ -35,7 +50,6 @@ class ViewModel: ObservableObject {
             currentStep = 0
             xLine.removeAll()
             oLine.removeAll()
-            bannerText = ""
             endGame = false
         }
     }

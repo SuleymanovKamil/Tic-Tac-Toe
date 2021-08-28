@@ -17,23 +17,16 @@ struct VictoryLine: View {
             .offset(x: Xoffset, y: Yoffset)
             .opacity(viewModel.endGame ? 1 : 0)
             .zIndex(1)
-            .onChange(of: viewModel.currentStep, perform: { value in
-                if value == 9 {
-                    viewModel.bannerText = "DRAW!"
-                    viewModel.resetGame(isResetButtonPressed: false)
-                }
-            })
             .onChange(of: viewModel.endGame, perform: { value in
-                if value && viewModel.currentStep < 9 && viewModel.xLine.count > viewModel.oLine.count {
+                if value && viewModel.currentStep <= 9 && viewModel.xLine.count > viewModel.oLine.count {
                     viewModel.xScore += 1
-                    viewModel.bannerText = "X WIN!"
                     viewModel.resetGame(isResetButtonPressed: false)
-                } else if value && viewModel.currentStep < 9 && viewModel.xLine.count == viewModel.oLine.count {
+                } else if value && viewModel.currentStep <= 9 && viewModel.xLine.count == viewModel.oLine.count {
                     viewModel.oScore += 1
-                    viewModel.bannerText = "O WIN!"
                     viewModel.resetGame(isResetButtonPressed: false)
                 }
             })
+           
     }
     
     private var Yoffset:CGFloat {
