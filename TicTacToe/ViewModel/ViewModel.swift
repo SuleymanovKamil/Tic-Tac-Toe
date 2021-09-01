@@ -26,6 +26,7 @@ class ViewModel: ObservableObject {
         } else if OWin {
             return "O WIN!"
         } else if currentStep == 9 {
+             resetGame(isResetButtonPressed: false)
             return "Draw!"
         } else {
             return ""
